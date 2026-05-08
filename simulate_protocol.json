@@ -1,0 +1,39 @@
+{
+  "id": "simulate_protocol",
+  "name": "simulate_protocol",
+  "mcp_name": "opentrons",
+  "description": "Run an OT-2 Python protocol script through opentrons_simulate (dry-run) and return the full simulation log text plus step count. Requires the OT_VENV_PYTHON environment variable to point to a Python executable in a virtualenv that has the opentrons package installed.",
+  "inputs": [
+    {
+      "name": "protocol_code",
+      "type": "string",
+      "description": "Complete OT-2 Python protocol script source code to simulate.",
+      "required": true
+    },
+    {
+      "name": "output_filename",
+      "type": "string",
+      "description": "Optional filename for the saved log file (default: simulation_output.txt).",
+      "required": false
+    }
+  ],
+  "outputs": [
+    {
+      "name": "result",
+      "type": "string",
+      "description": "JSON string with keys: log (full text), step_count, output_file, success (bool), or error on failure."
+    }
+  ],
+  "examples": [
+    {
+      "input": {
+        "protocol_code": "from opentrons import protocol_api\nmetadata = {'apiLevel': '2.13'}\ndef run(protocol): pass",
+        "output_filename": "my_sim.txt"
+      },
+      "output": "{\"log\": \"...\", \"step_count\": 0, \"output_file\": \"my_sim.txt\", \"success\": true}"
+    }
+  ],
+  "execution_details": {
+    "seq_params": []
+  }
+}
